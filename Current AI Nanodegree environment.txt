@@ -1,0 +1,26 @@
+Current AI Nanodegree environment
+I've made an environment file which will install Python 3 and all the necessary packages used in the AI Nanodegree program.
+
+To create the environment,
+
+Mac OS X and Linux
+Download the aind-environment-unix.yml file at the bottom of this page (right click, save file).
+conda env create -f aind-environment-unix.yml to create the environment.
+then source activate aind to enter the environment.
+Windows
+Download the Visual C++ Build Tools here. If you are having trouble on this step feel free to skip ahead. You'll only need this for hmmlearn in the very last project.
+Download the aind-environment-windows.yml file at the bottom of this page (right click, save file).
+conda env create -f aind-environment-windows.yml to create the environment.
+then activate aind to enter the environment.
+If you are seeing errors around hmmlearn don't worry about that too much now. You will only use that for your final project and you'll have plenty of time to fix up that issue before then.
+Optional: Install Pygame
+Through this Nanodegree, we'll use pygame to help you visualize your programs so that you have beautiful visualizations of AI you can share with others in your portfolio. However, pygame is optional as it can be tricky to install. If you'd like to install it, here are the steps:
+
+Mac OS X
+Install homebrew
+brew install sdl sdl_image sdl_mixer sdl_ttf portmidi mercurial
+source activate aind
+pip install pygame
+Windows and Linux
+pip install pygame
+As our curriculum is updated, this environment file will likely change. I'll also be building smaller environments for each course and project.
