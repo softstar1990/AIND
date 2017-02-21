@@ -31,10 +31,10 @@ from sample_players import null_score
 from sample_players import open_move_score
 from sample_players import improved_score
 from game_agent import CustomPlayer
-from game_agent import custom_score
+from game_agent import custom_score, custom_score0, custom_score1, custom_score2
 
 NUM_MATCHES = 5  # number of matches against each opponent
-TIME_LIMIT = 150  # number of milliseconds before timeout
+TIME_LIMIT = 200  # number of milliseconds before timeout
 
 TIMEOUT_WARNING = "One or more agents lost a match this round due to " + \
                   "timeout. The get_move() function must return before " + \
@@ -160,8 +160,14 @@ def main():
     # systems; i.e., the performance of the student agent is considered
     # relative to the performance of the ID_Improved agent to account for
     # faster or slower computers.
+    # test_agents = [Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
+    #                Agent(CustomPlayer(score_fn=custom_score0, **CUSTOM_ARGS), "Student_linear"),
+    #                Agent(CustomPlayer(score_fn=custom_score1, **CUSTOM_ARGS), "Student_propotion"),
+    #                Agent(CustomPlayer(score_fn=custom_score2, **CUSTOM_ARGS), "Student_edge"),
+    #                Agent(CustomPlayer(score_fn=custom_score, **CUSTOM_ARGS), "Student")]
+
     test_agents = [Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
-                   Agent(CustomPlayer(score_fn=custom_score, **CUSTOM_ARGS), "Student")]
+                    Agent(CustomPlayer(score_fn=custom_score, **CUSTOM_ARGS), "Student")]
 
     print(DESCRIPTION)
     for agentUT in test_agents:

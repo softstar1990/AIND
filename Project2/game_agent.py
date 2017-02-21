@@ -14,7 +14,7 @@ class Timeout(Exception):
     pass
 
 
-def custom_score(game, player):
+def custom_score0(game, player):
     """Calculate the heuristic value of a game state from the point of view
     of the given player.
 
@@ -38,14 +38,45 @@ def custom_score(game, player):
     """
 
     # The simple heuristic, just use # of my moves substract # of opponent's moves
+    # adjust the coefficients for own_moves and opp moves to change the strategy
     if game.is_winner(player): return float('inf')
     if game.is_loser(player): return float('-inf')
 
     own_moves = len(game.get_legal_moves(player))
     opp_moves = len(game.get_legal_moves(game.get_opponent(player)))
 
-    return float(3 * own_moves - 2 * opp_moves)
+    return float(1 * own_moves - 2 * opp_moves)
 
+def custom_score1(game, player):
+    # Proportion heuristic - Divide the number of moves and get a proportion
+    if game.is_winner(player): return float('inf')
+    if game.is_loser(player): return float('-inf')
+
+    own_moves = len(game.get_legal_moves(player))
+    opp_moves = len(game.get_legal_moves(game.get_opponent(player)))
+
+    return float(own_moves / opp_moves) if opp_moves > 0 else float('inf')
+
+
+def custom_score2(game,player):
+    if game.is_winner(player): return float('inf')
+    if game.is_loser(player): return float('-inf')
+    
+    position =  game.get_player_location(player)
+
+    return abs(position[0] - game.width/2) + abs(position[1] - game.height/2)
+
+def custom_score(game,player):
+    if game.is_winner(player): return float('inf')
+    if game.is_loser(player): return float('-inf')
+
+    own_moves = len(game.get_legal_moves(player))
+    opp_moves = len(game.get_legal_moves(game.get_opponent(player)))
+    position =  game.get_player_location(player)
+
+    if opp_moves == 0: return float('inf')
+
+    return float(1.5 * own_moves - 3 * opp_moves) + (abs(position[0] - game.width/2) + abs(position[1] - game.height/2))
 
 class CustomPlayer:
     """Game-playing agent that chooses a move using your evaluation function
