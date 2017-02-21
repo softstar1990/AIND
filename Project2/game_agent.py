@@ -59,6 +59,7 @@ def custom_score1(game, player):
 
 
 def custom_score2(game,player):
+    #try to penalize center positions
     if game.is_winner(player): return float('inf')
     if game.is_loser(player): return float('-inf')
     
@@ -76,7 +77,7 @@ def custom_score(game,player):
 
     if opp_moves == 0: return float('inf')
 
-    return float(1.5 * own_moves - 3 * opp_moves) + (abs(position[0] - game.width/2) + abs(position[1] - game.height/2))
+    return float(own_moves - opp_moves) * game.width + (abs(position[0] - game.width/2) + abs(position[1] - game.height/2))
 
 class CustomPlayer:
     """Game-playing agent that chooses a move using your evaluation function

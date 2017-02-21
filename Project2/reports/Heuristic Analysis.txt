@@ -1,0 +1,49 @@
+Heuristic Analysis
+
+1 Linear Heuristic
+
+Score function:
+	legal_moves(player) -  2 * legal_moves(opponent)
+
+Reason:
+
+It is similar to the improved score given by the sample players. By having weight 2 for number of opponent's legal moves. It will make our agent more aggressive in limiting opponent's possible moves. I also tried different weights so that our agent care more about itself while the result are actually similar.
+
+Result:
+This heuristic usually have a winning rate around 70% in tournament on my machine. Which is similar to the performance of improved score. When matching against open score or improved score, it can have result like 12-8, 11-9.
+
+
+2 Ratio Heuristic
+
+Score function:
+	legal_moves(player) / legal_moves(opponent)
+
+Reason:
+This is still a function that have greater value when player have more legal moves and less value when opponent have more legel moves. However, it is more confident at the late game than the early game. For example, if play have 10 available moves while opponent have 8, improved score will give 2 while this heuristic will give 1.25. If play have 3 available moves while opponent have 1, imporved score will still give 3 but this heuristic will give 3. Which make sense to me, since we can have a better evaluation of the game state at a late time.
+
+Result:
+This heuristic can reach 75% winning rate on my machine. However the result is not that stable. I ran the tournament for a few times and the rate varies a lot (from 60% to 75%). This situation also happens to improved score, maybe run more tournament and take an average will be better.
+
+3 Position Heuristic
+
+Score function:
+	Abs(x - width/2) + Abs(y - width/2)
+
+Reason:
+This function simplily gives greater value when the move is closer to the edge of the board. Select this kind of move can escape away from opponent sometime.
+
+Result:
+This heuristic only get a winning rate around 60% to 65%. It seems only considering the position of the move without other information makes the heuristic a little bit weak.
+
+4 Ensemble Heuristic
+
+Score function:
+	(legal moves(player) - legal moves(opponent)) * board width + Abs(x - width/2) + Abs(y - width/2)
+
+Reason:
+Trying to take advantage from two ways of thinking, one is have more available moves than opponent, the other is have a good position. I give the first part a large weight, so the consideration of position will be more like a tie breaker.
+
+Result:
+This heuristic usually gives a wining rate a little bit higher than 70% on my machine. I choose to submit this funtion.
+
+
