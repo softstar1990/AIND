@@ -33,12 +33,14 @@ def build_part1_RNN(window_size):
 
 ### TODO: return the text input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
-    import re
     punctuation = ['!', ',', '.', ':', ';', '?']
+    english_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 
+                  'u', 'v', 'w', 'x', 'y', 'z', ' ']
 
-    # remove as many non-english characters and character sequences as you can 
-    text = re.sub('([^a-zA-Z!,.:;?\s])+', ' ', text)
-    text = text.replace(u'\xa0', ' ')
+    for i in range(len(text)):
+        if (text[i] not in english_letters) and (text[i] not in punctuation):
+            text = text.replace(text[i], ' ')
+            
     return text
 
 ### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
